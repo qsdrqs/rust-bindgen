@@ -363,6 +363,10 @@ impl Builder {
             output_vector.push("--no-derive-debug".into());
         }
 
+        if !self.options.derive_shadow {
+            output_vector.push("--no-derive-shadow".into());
+        }
+
         if !self.options.derive_default {
             output_vector.push("--no-derive-default".into());
         } else {
@@ -1172,6 +1176,12 @@ impl Builder {
         self
     }
 
+    /// Set whether `Shadow` should be derived by default.
+    pub fn derive_shadow(mut self, doit: bool) -> Self {
+        self.options.derive_shadow = doit;
+        self
+    }
+
     /// Set whether `Default` should be derived by default.
     pub fn derive_default(mut self, doit: bool) -> Self {
         self.options.derive_default = doit;
@@ -1830,6 +1840,10 @@ struct BindgenOptions {
     /// and types.
     derive_hash: bool,
 
+    /// True if we should derive Shadow trait implementations for C/C++ structures
+    /// and types.
+    derive_shadow: bool,
+
     /// True if we should derive PartialOrd trait implementations for C/C++ structures
     /// and types.
     derive_partialord: bool,
@@ -1972,6 +1986,9 @@ struct BindgenOptions {
     /// The set of types that we should not derive `Hash` for.
     no_hash_types: RegexSet,
 
+    /// The set of types that we should not derive `Shadow` for.
+    no_shadow_types: RegexSet,
+
     /// The set of types that we should be annotated with `#[must_use]`.
     must_use_types: RegexSet,
 
@@ -2099,6 +2116,7 @@ impl Default for BindgenOptions {
             impl_partialeq: false,
             derive_copy: true,
             derive_debug: true,
+            derive_shadow: true,
             derive_default: false,
             derive_hash: false,
             derive_partialord: false,
@@ -2141,6 +2159,7 @@ impl Default for BindgenOptions {
             no_partialeq_types: Default::default(),
             no_copy_types: Default::default(),
             no_debug_types: Default::default(),
+            no_shadow_types: Default::default(),
             no_default_types: Default::default(),
             no_hash_types: Default::default(),
             must_use_types: Default::default(),

@@ -29,6 +29,8 @@ pub enum DeriveTrait {
     Hash,
     /// The `PartialEq` and `PartialOrd` traits.
     PartialEqOrPartialOrd,
+    /// The `Shadow` trait.
+    Shadow,
 }
 
 /// An analysis that finds for each IR item whether a trait cannot be derived.
@@ -462,6 +464,7 @@ impl DeriveTrait {
             DeriveTrait::Debug => ctx.no_debug_by_name(item),
             DeriveTrait::Default => ctx.no_default_by_name(item),
             DeriveTrait::Hash => ctx.no_hash_by_name(item),
+            DeriveTrait::Shadow => ctx.no_shadow_by_name(item),
             DeriveTrait::PartialEqOrPartialOrd => {
                 ctx.no_partialeq_by_name(item)
             }
@@ -615,6 +618,7 @@ impl fmt::Display for DeriveTrait {
             DeriveTrait::Default => "Default",
             DeriveTrait::Hash => "Hash",
             DeriveTrait::PartialEqOrPartialOrd => "PartialEq/PartialOrd",
+            DeriveTrait::Shadow => "Shadow",
         };
         s.fmt(f)
     }

@@ -7,7 +7,7 @@ use super::comment;
 use super::comp::{CompKind, MethodKind};
 use super::context::{BindgenContext, ItemId, PartialType, TypeId};
 use super::derive::{
-    CanDeriveCopy, CanDeriveDebug, CanDeriveDefault, CanDeriveEq,
+    CanDeriveCopy, CanDeriveDebug, CanDeriveShadow, CanDeriveDefault, CanDeriveEq,
     CanDeriveHash, CanDeriveOrd, CanDerivePartialEq, CanDerivePartialOrd,
 };
 use super::dot::DotAttributes;
@@ -327,6 +327,12 @@ impl CanDeriveDefault for Item {
 impl CanDeriveCopy for Item {
     fn can_derive_copy(&self, ctx: &BindgenContext) -> bool {
         self.id().can_derive_copy(ctx)
+    }
+}
+
+impl CanDeriveShadow for Item {
+    fn can_derive_shadow(&self, ctx: &BindgenContext) -> bool {
+        self.id().can_derive_shadow(ctx)
     }
 }
 

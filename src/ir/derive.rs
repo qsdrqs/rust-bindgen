@@ -32,6 +32,14 @@ pub trait CanDeriveCopy {
     fn can_derive_copy(&self, ctx: &BindgenContext) -> bool;
 }
 
+/// A trait that encapsulates the logic for whether or not we can derive `Shadow`
+/// for a given thing.
+pub trait CanDeriveShadow {
+    /// Return `true` if `Shadow` can be derived for this thing, `false`
+    /// otherwise.
+    fn can_derive_shadow(&self, ctx: &BindgenContext) -> bool;
+}
+
 /// A trait that encapsulates the logic for whether or not we can derive
 /// `Default` for a given thing.
 pub trait CanDeriveDefault {

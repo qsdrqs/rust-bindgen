@@ -8,7 +8,7 @@ use super::analysis::{
     UsedTemplateParameters,
 };
 use super::derive::{
-    CanDerive, CanDeriveCopy, CanDeriveDebug, CanDeriveDefault, CanDeriveEq,
+    CanDerive, CanDeriveCopy, CanDeriveDebug, CanDeriveShadow, CanDeriveDefault, CanDeriveEq,
     CanDeriveHash, CanDeriveOrd, CanDerivePartialEq, CanDerivePartialOrd,
 };
 use super::function::Function;
@@ -236,6 +236,15 @@ where
     }
 }
 
+impl<T> CanDeriveShadow for T
+where
+    T: Copy + Into<ItemId>,
+{
+    fn can_derive_shadow(&self, ctx: &BindgenContext) -> bool {
+        ctx.options().derive_shadow && ctx.lookup_can_derive_shadow(*self)
+    }
+}
+
 impl<T> CanDeriveHash for T
 where
     T: Copy + Into<ItemId>,
@@ -417,6 +426,12 @@ pub struct BindgenContext {
     /// and is always `None` before that and `Some` after.
     cannot_derive_copy: Option<HashSet<ItemId>>,
 
+    /// The set of (`ItemId`s of) types that can't derive shadow.
+    ///
+    /// This is populated when we enter codegen by `compute_cannot_derive_shadow`
+    /// and is always `None` before that and `Some` after.
+    cannot_derive_shadow: Option<HashSet<ItemId>>,
+
     /// The set of (`ItemId`s of) types that can't derive hash.
     ///
     /// This is populated when we enter codegen by `compute_can_derive_hash`
@@ -572,6 +587,7 @@ If you encounter an error missing from this list, please file an issue or a PR!"
             cannot_derive_debug: None,
             cannot_derive_default: None,
             cannot_derive_copy: None,
+            cannot_derive_shadow: None,
             cannot_derive_hash: None,
             cannot_derive_partialeq_or_partialord: None,
             sizedness: None,
@@ -1165,6 +1181,7 @@ If you encounter an error missing from this list, please file an issue or a PR!"
         self.compute_cannot_derive_debug();
         self.compute_cannot_derive_default();
         self.compute_cannot_derive_copy();
+        self.compute_cannot_derive_shadow();
         self.compute_has_type_param_in_array();
         self.compute_has_float();
         self.compute_cannot_derive_hash();
@@ -1445,7 +1462,7 @@ If you encounter an error missing from this list, please file an issue or a PR!"
         &self,
         id: Id,
     ) -> Option<&Item> {
-        self.items.get(id.into().0)?.as_ref()
+        self.items.get(id.into().0)?.as_ref() as Option<&Item>
     }
 
     /// Resolve the given `ItemId` into an `Item`.
@@ -2528,6 +2545,17 @@ If you encounter an error missing from this list, please file an issue or a PR!"
             ))));
     }
 
+    /// Compute whether we can derive shadow.
+    fn compute_cannot_derive_shadow(&mut self) {
+        let _t = self.timer("compute_cannot_derive_shadow");
+        assert!(self.cannot_derive_shadow.is_none());
+        self.cannot_derive_shadow =
+            Some(as_cannot_derive_set(analyze::<CannotDerive>((
+                self,
+                DeriveTrait::Shadow,
+            ))));
+    }
+
     /// Compute whether we can derive hash.
     fn compute_cannot_derive_hash(&mut self) {
         let _t = self.timer("compute_cannot_derive_hash");
@@ -2605,6 +2633,21 @@ If you encounter an error missing from this list, please file an issue or a PR!"
 
         !self.lookup_has_type_param_in_array(id) &&
             !self.cannot_derive_copy.as_ref().unwrap().contains(&id)
+    }
+
+    /// Look up whether the item with `id` can derive `Shadow` or not.
+    pub fn lookup_can_derive_shadow<Id: Into<ItemId>>(&self, id: Id) -> bool {
+        assert!(
+            self.in_codegen_phase(),
+            "We only compute can_derive_debug when we enter codegen"
+        );
+
+        // Look up the computed value for whether the item with `id` can
+        // derive `Shadow` or not.
+        let id = id.into();
+
+        !self.lookup_has_type_param_in_array(id) &&
+            !self.cannot_derive_shadow.as_ref().unwrap().contains(&id)
     }
 
     /// Compute whether the type has type parameter in array.
@@ -2688,6 +2731,12 @@ If you encounter an error missing from this list, please file an issue or a PR!"
     pub fn must_use_type_by_name(&self, item: &Item) -> bool {
         let name = item.path_for_allowlisting(self)[1..].join("::");
         self.options().must_use_types.matches(&name)
+    }
+
+    /// Check if `--no-shadow` flag is enabled for this item.
+    pub fn no_shadow_by_name(&self, item: &Item) -> bool {
+        let name = item.path_for_allowlisting(self)[1..].join("::");
+        self.options().no_shadow_types.matches(&name)
     }
 }
 

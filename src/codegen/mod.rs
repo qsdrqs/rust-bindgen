@@ -26,7 +26,7 @@ use crate::ir::comp::{
 };
 use crate::ir::context::{BindgenContext, ItemId};
 use crate::ir::derive::{
-    CanDerive, CanDeriveCopy, CanDeriveDebug, CanDeriveDefault, CanDeriveEq,
+    CanDerive, CanDeriveCopy, CanDeriveDebug, CanDeriveShadow, CanDeriveDefault, CanDeriveEq,
     CanDeriveHash, CanDeriveOrd, CanDerivePartialEq, CanDerivePartialOrd,
 };
 use crate::ir::dot;
@@ -102,11 +102,12 @@ bitflags! {
         const DEFAULT     = 1 << 1;
         const COPY        = 1 << 2;
         const CLONE       = 1 << 3;
-        const HASH        = 1 << 4;
-        const PARTIAL_ORD = 1 << 5;
-        const ORD         = 1 << 6;
-        const PARTIAL_EQ  = 1 << 7;
-        const EQ          = 1 << 8;
+        const SHADOW      = 1 << 4;
+        const HASH        = 1 << 5;
+        const PARTIAL_ORD = 1 << 6;
+        const ORD         = 1 << 7;
+        const PARTIAL_EQ  = 1 << 8;
+        const EQ          = 1 << 9;
     }
 }
 
@@ -143,6 +144,10 @@ fn derives_of_item(
         derivable_traits |= DerivableTraits::DEBUG;
     }
 
+    if item.can_derive_shadow(ctx) {
+        derivable_traits |= DerivableTraits::SHADOW;
+    }
+
     if item.can_derive_default(ctx) && !item.annotations().disallow_default() {
         derivable_traits |= DerivableTraits::DEFAULT;
     }
@@ -177,6 +182,7 @@ impl From<DerivableTraits> for Vec<&'static str> {
             (DerivableTraits::DEFAULT, "Default"),
             (DerivableTraits::COPY, "Copy"),
             (DerivableTraits::CLONE, "Clone"),
+            (DerivableTraits::SHADOW, "Shadow"),
             (DerivableTraits::HASH, "Hash"),
             (DerivableTraits::PARTIAL_ORD, "PartialOrd"),
             (DerivableTraits::ORD, "Ord"),

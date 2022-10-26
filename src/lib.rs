@@ -331,6 +331,7 @@ impl Builder {
             (&self.options.no_partialeq_types, "--no-partialeq"),
             (&self.options.no_copy_types, "--no-copy"),
             (&self.options.no_debug_types, "--no-debug"),
+            (&self.options.no_shadow_types, "--no-shadow"),
             (&self.options.no_default_types, "--no-default"),
             (&self.options.no_hash_types, "--no-hash"),
             (&self.options.must_use_types, "--must-use-type"),
@@ -1621,6 +1622,13 @@ impl Builder {
         self
     }
 
+    /// Don't derive `Shadow` for a given type. Regular
+    /// expressions are supported.
+    pub fn no_shadow<T: Into<String>>(mut self, arg: T) -> Self {
+        self.options.no_shadow_types.insert(arg.into());
+        self
+    }
+
     /// Don't derive/impl `Default` for a given type. Regular
     /// expressions are supported.
     pub fn no_default<T: Into<String>>(mut self, arg: T) -> Self {
@@ -1980,14 +1988,14 @@ struct BindgenOptions {
     /// The set of types that we should not derive `Debug` for.
     no_debug_types: RegexSet,
 
+    /// The set of types that we should not derive `Shadow` for.
+    no_shadow_types: RegexSet,
+
     /// The set of types that we should not derive/impl `Default` for.
     no_default_types: RegexSet,
 
     /// The set of types that we should not derive `Hash` for.
     no_hash_types: RegexSet,
-
-    /// The set of types that we should not derive `Shadow` for.
-    no_shadow_types: RegexSet,
 
     /// The set of types that we should be annotated with `#[must_use]`.
     must_use_types: RegexSet,
@@ -2053,6 +2061,7 @@ impl BindgenOptions {
             &mut self.no_partialeq_types,
             &mut self.no_copy_types,
             &mut self.no_debug_types,
+            &mut self.no_shadow_types,
             &mut self.no_default_types,
             &mut self.no_hash_types,
             &mut self.must_use_types,

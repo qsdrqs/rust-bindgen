@@ -152,6 +152,9 @@ $ cargo test
 
 ### Testing a Single Header's Bindings Generation and Compiling its Bindings
 
+Note: You will to need to install [Graphviz](https://graphviz.org/) since that
+is a dependency for running `test-one.sh`.
+
 Sometimes its useful to work with one test header from start (generating
 bindings for it) to finish (compiling the bindings and running their layout
 tests). This can be done with the `tests/test-one.sh` script. It supports fuzzy
@@ -315,7 +318,19 @@ parameters a given type uses. The analyses are defined in
 
 The final phase is generating Rust source text from the analyzed IR, and it is
 defined in `src/codegen/*`. We use the `quote` crate, which provides the `quote!
-{ ... }` macro for quasi-quoting Rust forms.
+{ ... }` macro for quasi-quoting Rust forms. Some options that affect the
+generated Rust code are implemented using the [`syn`](https://docs.rs/syn) crate.
+
+### Implementing new options using `syn`
+
+If a new option can be implemented using the `syn` crate it should be added to
+the `codegen::postprocessing` module by following these steps:
+
+- Introduce a new field to `BindgenOptions` for the option.
+- Write a free function inside `codegen::postprocessing` implementing the
+  option. This function with the same name of the `BindgenOptions` field.
+- Add a new value to the `codegen::postprocessing::PASSES` for the option using
+  the `pass!` macro.
 
 ## Pull Requests and Code Reviews
 
@@ -503,3 +518,49 @@ case down to 5 lines.
 Happy bug hunting and test case reducing!
 
 [More information on using `creduce`.](https://embed.cs.utah.edu/creduce/using/)
+
+## Cutting a new bindgen release
+
+To cut a release, the following needs to happen:
+
+### Updating the changelog
+
+Update the CHANGELOG.md file with the changes from the last release. Something
+like the following is a useful way to check what has landed:
+
+ ```
+ $ git log --oneline v0.62.0..HEAD
+ ```
+
+Also worth checking the [next-release tag](https://github.com/rust-lang/rust-bindgen/pulls?q=is%3Apr+label%3Anext-release).
+
+Once that's done and the changelog is up-to-date, run `doctoc` on it.
+
+If needed, install it locally by running:
+
+```
+$ npm install doctoc
+$ ./node_modules/doctoc/doctoc.js CHANGELOG.md
+```
+
+### Bumping the version numbers.
+
+Bump version numbers as needed. Run tests just to ensure everything is working
+as expected.
+
+### Merge to `master`
+
+For regular releases, the changes above should end up in `master` before
+publishing. For dot-releases of an old version (e.g., cherry-picking an
+important fix) you can skip this.
+
+### Publish and add a git tag for the right commit
+
+Once you're in the right commit, do:
+
+```
+$ git tag -a v0.62.1 # With the right version of course
+$ pushd bindgen && cargo publish && popd
+$ pushd bindgen-cli && cargo publish && popd
+$ git push --tags upstream # To publish the tag
+```

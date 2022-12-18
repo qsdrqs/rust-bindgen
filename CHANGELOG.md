@@ -7,133 +7,143 @@
   - [Removed](#removed)
   - [Fixed](#fixed)
   - [Security](#security)
-- [0.60.0](#0600)
+- [0.62.0](#0620)
   - [Added](#added-1)
-  - [Fixed](#fixed-1)
   - [Changed](#changed-1)
+  - [Fixed](#fixed-1)
+- [0.61.0](#0610)
+  - [Added](#added-2)
+  - [Changed](#changed-2)
+  - [Fixed](#fixed-2)
+- [0.60.1](#0601)
+  - [Fixed](#fixed-3)
+- [0.60.0](#0600)
+  - [Added](#added-3)
+  - [Fixed](#fixed-4)
+  - [Changed](#changed-3)
   - [Removed](#removed-1)
 - [0.59.2](#0592)
 - [0.59.1](#0591)
-  - [Fixed](#fixed-2)
+  - [Fixed](#fixed-5)
 - [0.59.0](#0590)
-  - [Added](#added-2)
-  - [Fixed](#fixed-3)
-  - [Changed](#changed-2)
-- [0.58.1](#0581)
-  - [Added](#added-3)
-- [0.58.0](#0580)
   - [Added](#added-4)
-  - [Fixed](#fixed-4)
-  - [Changed](#changed-3)
+  - [Fixed](#fixed-6)
+  - [Changed](#changed-4)
+- [0.58.1](#0581)
+  - [Added](#added-5)
+- [0.58.0](#0580)
+  - [Added](#added-6)
+  - [Fixed](#fixed-7)
+  - [Changed](#changed-5)
   - [Deprecated](#deprecated)
   - [Removed](#removed-2)
-  - [Fixed](#fixed-5)
+  - [Fixed](#fixed-8)
   - [Security](#security-1)
 - [0.57.0](#0570)
-  - [Added](#added-5)
-  - [Fixed](#fixed-6)
-- [0.56.0](#0560)
-  - [Added](#added-6)
-  - [Changed](#changed-4)
-  - [Fixed](#fixed-7)
-- [0.55.1](#0551)
-  - [Fixed](#fixed-8)
-- [0.55.0](#0550)
-  - [Removed](#removed-3)
   - [Added](#added-7)
-  - [Changed](#changed-5)
   - [Fixed](#fixed-9)
-- [0.54.1](#0541)
+- [0.56.0](#0560)
   - [Added](#added-8)
   - [Changed](#changed-6)
   - [Fixed](#fixed-10)
-- [0.54.0](#0540)
+- [0.55.1](#0551)
+  - [Fixed](#fixed-11)
+- [0.55.0](#0550)
+  - [Removed](#removed-3)
   - [Added](#added-9)
   - [Changed](#changed-7)
-  - [Fixed](#fixed-11)
-- [0.53.3](#0533)
-  - [Added](#added-10)
   - [Fixed](#fixed-12)
-- [0.53.2](#0532)
+- [0.54.1](#0541)
+  - [Added](#added-10)
   - [Changed](#changed-8)
-- [0.53.1](#0531)
-  - [Added](#added-11)
-- [0.53.0](#0530)
-  - [Added](#added-12)
-  - [Changed](#changed-9)
   - [Fixed](#fixed-13)
-- [0.52.0](#0520)
-  - [Added](#added-13)
-  - [Changed](#changed-10)
+- [0.54.0](#0540)
+  - [Added](#added-11)
+  - [Changed](#changed-9)
   - [Fixed](#fixed-14)
-- [0.51.1](#0511)
+- [0.53.3](#0533)
+  - [Added](#added-12)
   - [Fixed](#fixed-15)
-  - [Changed](#changed-11)
-- [0.51.0](#0510)
-  - [Fixed](#fixed-16)
-  - [Changed](#changed-12)
+- [0.53.2](#0532)
+  - [Changed](#changed-10)
+- [0.53.1](#0531)
+  - [Added](#added-13)
+- [0.53.0](#0530)
   - [Added](#added-14)
-- [0.50.0](#0500)
+  - [Changed](#changed-11)
+  - [Fixed](#fixed-16)
+- [0.52.0](#0520)
   - [Added](#added-15)
-- [0.49.3](#0493)
-  - [Added](#added-16)
-- [0.49.2](#0492)
-  - [Changed](#changed-13)
-- [0.49.1](#0491)
+  - [Changed](#changed-12)
   - [Fixed](#fixed-17)
-  - [Changed](#changed-14)
-- [0.49.0](#0490)
-  - [Added](#added-17)
+- [0.51.1](#0511)
   - [Fixed](#fixed-18)
-  - [Changed](#changed-15)
-- [0.48.1](#0481)
+  - [Changed](#changed-13)
+- [0.51.0](#0510)
   - [Fixed](#fixed-19)
-- [0.48.0](#0480)
-  - [Changed](#changed-16)
-  - [Fixed](#fixed-20)
-- [0.47.4](#0474)
+  - [Changed](#changed-14)
+  - [Added](#added-16)
+- [0.50.0](#0500)
+  - [Added](#added-17)
+- [0.49.3](#0493)
   - [Added](#added-18)
-- [0.47.3](#0473)
-  - [Changed](#changed-17)
-- [0.47.2](#0472)
-  - [Fixed](#fixed-21)
-- [0.47.1](#0471)
-  - [Changed](#changed-18)
-  - [Fixed](#fixed-22)
-- [0.47.0](#0470)
-  - [Changed](#changed-19)
-  - [Fixed](#fixed-23)
-- [0.33.1 .. 0.46.0](#0331--0460)
+- [0.49.2](#0492)
+  - [Changed](#changed-15)
+- [0.49.1](#0491)
+  - [Fixed](#fixed-20)
+  - [Changed](#changed-16)
+- [0.49.0](#0490)
   - [Added](#added-19)
-  - [Removed](#removed-4)
-  - [Changed](#changed-20)
+  - [Fixed](#fixed-21)
+  - [Changed](#changed-17)
+- [0.48.1](#0481)
+  - [Fixed](#fixed-22)
+- [0.48.0](#0480)
+  - [Changed](#changed-18)
+  - [Fixed](#fixed-23)
+- [0.47.4](#0474)
+  - [Added](#added-20)
+- [0.47.3](#0473)
+  - [Changed](#changed-19)
+- [0.47.2](#0472)
   - [Fixed](#fixed-24)
-- [0.33.1](#0331)
+- [0.47.1](#0471)
+  - [Changed](#changed-20)
   - [Fixed](#fixed-25)
+- [0.47.0](#0470)
+  - [Changed](#changed-21)
+  - [Fixed](#fixed-26)
+- [0.33.1 .. 0.46.0](#0331--0460)
+  - [Added](#added-21)
+  - [Removed](#removed-4)
+  - [Changed](#changed-22)
+  - [Fixed](#fixed-27)
+- [0.33.1](#0331)
+  - [Fixed](#fixed-28)
 - [0.33.0](#0330)
 - [0.32.2](#0322)
-  - [Fixed](#fixed-26)
-- [0.32.1](#0321)
-  - [Fixed](#fixed-27)
-- [0.32.0](#0320)
-  - [Added](#added-20)
-  - [Changed](#changed-21)
-  - [Fixed](#fixed-28)
-- [0.31.0](#0310)
-  - [Added](#added-21)
-  - [Changed](#changed-22)
-  - [Deprecated](#deprecated-1)
-  - [Removed](#removed-5)
   - [Fixed](#fixed-29)
-- [0.30.0](#0300)
+- [0.32.1](#0321)
+  - [Fixed](#fixed-30)
+- [0.32.0](#0320)
   - [Added](#added-22)
   - [Changed](#changed-23)
-  - [Deprecated](#deprecated-2)
-  - [Fixed](#fixed-30)
-- [0.29.0](#0290)
+  - [Fixed](#fixed-31)
+- [0.31.0](#0310)
   - [Added](#added-23)
   - [Changed](#changed-24)
-  - [Fixed](#fixed-31)
+  - [Deprecated](#deprecated-1)
+  - [Removed](#removed-5)
+  - [Fixed](#fixed-32)
+- [0.30.0](#0300)
+  - [Added](#added-24)
+  - [Changed](#changed-25)
+  - [Deprecated](#deprecated-2)
+  - [Fixed](#fixed-33)
+- [0.29.0](#0290)
+  - [Added](#added-25)
+  - [Changed](#changed-26)
+  - [Fixed](#fixed-34)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -145,13 +155,104 @@
 
 ## Changed
 
- * clap has been updated, new msrv is 1.57.
-
 ## Removed
 
 ## Fixed
 
 ## Security
+
+# 0.63.0
+
+## Added
+
+## Changed
+ * Only wrap unsafe operations in unsafe blocks if the `--wrap_unsafe_ops`
+   option is enabled.
+ * Replace the `name: &str` argument for `ParseCallbacks::add_derives` by
+   `info: DeriveInfo`.
+ * All the rust targets equal or lower than `1.30` are being deprecated and
+   will be removed in the future. If you have a good reason to use any of these
+   targets, please report it in the issue tracker.
+
+## Removed
+
+ * The following deprecated methods and their equivalent CLI arguments were
+   removed: `whitelist_recursively`, `hide_type`, `blacklist_type`,
+   `blacklist_function`, `blacklist_item`, `whitelisted_type`,
+   `whitelist_type`, `whitelist_function`, `whitelisted_function`,
+   `whitelist_var`, `whitelisted_var`, `unstable_rust`.
+
+# 0.62.0
+
+## Added
+
+ * new feature: `--override-abi` flag to override the ABI used by functions
+   matching a regular expression.
+ * new feature: allow using the `C-unwind` ABI in `--override-abi` on nightly
+   rust.
+ * new feature: `process_comments` method to the `ParseCallbacks` trait to
+   handle source code comments.
+
+## Changed
+
+ * Regex inputs are sanitized so alternation (`a|b`) is handled correctly but
+   wildcard patterns (`*`) are now considered invalid.
+ * the `ParseCallbacks`trait does not require to implement `UnwindSafe`.
+ * the `Builder::parse_callbacks` method no longer overwrites previously added
+   callbacks and composes them in a last-to-first manner.
+ * any generated rust code containing unsafe operations inside unsafe functions
+   is wrapped in unsafe blocks now.
+
+## Fixed
+
+ * Various issues with upcoming clang/libclang versions have been fixed.
+
+# 0.61.0
+
+Released 2022/10/16
+
+## Added
+
+ * new feature: `--sort-semantically` flag to sort the output in a predefined
+   manner [(#1743)].
+ * new feature: `Bindgen::emit_warnings` method to emit warnings to stderr in
+   build scripts.
+ * new feature: `--newtype-global-enum` flag to generate enum variants as
+   global constants.
+ * new feature: `--default-non-copy-union-style` flag to set the default style
+   of code used to generate unions with non-`Copy` members.
+ * new feature: `--bindgen-wrapper-union` flag to mark any union that matches a
+   regex and has a non-Copy member to use a bindgen-generated wrapper for its
+   fields.
+ * new feature: `--manually-drop-union` flag to mark any union that matches a
+   regex and has a non-`Copy` member to use `ManuallyDrop`.
+ * new feature: `--merge-extern-blocks` flag to merge several `extern` blocks
+   that have the same ABI.
+ * new feature: `--no-size_t-is-usize` flag to not bind `size_t` as `usize`.
+ * new feature: `Builder` implements `Clone`.
+
+## Changed
+
+ * clap and regex have been updated, new msrv is 1.57.
+ * The `--enable-function-attribute-detection` flag is also used to detect
+   diverging functions so the generated bindings use `!` as the return type.
+ * The `--size_t-is-usize` flag is enabled by default.
+ * Unused type aliases for `<stdint.h>` types are no longer emitted.
+ * The `blocklist` options now can be used to block objective-C methods.
+ * The `core::ffi` module is used the sized raw integer types
+   instead of `std::os::raw` if the Rust target version is `1.64` or higher and
+   the `--use-core` flag is enabled.
+ * The `bindgen` CLI utility must be installed using `cargo install
+   bindgen-cli` now.
+ * Using `bindgen` as a library no longer pulls clap and any other CLI
+   related dependencies.
+
+## Fixed
+
+ * Const correctness of incomplete arrays has been fixed. (#2301)
+ * C++ inline namespaces don't panic. (#2294)
+
+[(#1743)]: https://github.com/rust-lang/rust-bindgen/issues/1743
 
 # 0.60.1
 

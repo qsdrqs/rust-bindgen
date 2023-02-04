@@ -2563,11 +2563,13 @@ If you encounter an error missing from this list, please file an issue or a PR!"
     fn compute_cannot_derive_shadow(&mut self) {
         let _t = self.timer("compute_cannot_derive_shadow");
         assert!(self.cannot_derive_shadow.is_none());
-        self.cannot_derive_shadow =
-            Some(as_cannot_derive_set(analyze::<CannotDerive>((
-                self,
-                DeriveTrait::Shadow,
-            ))));
+        if self.options.derive_shadow {
+            self.cannot_derive_shadow =
+                Some(as_cannot_derive_set(analyze::<CannotDerive>((
+                    self,
+                    DeriveTrait::Shadow,
+                ))));
+        }
     }
 
     /// Compute whether we can derive hash.
@@ -2660,8 +2662,7 @@ If you encounter an error missing from this list, please file an issue or a PR!"
         // derive `Shadow` or not.
         let id = id.into();
 
-        !self.lookup_has_type_param_in_array(id) &&
-            !self.cannot_derive_shadow.as_ref().unwrap().contains(&id)
+        !self.lookup_has_type_param_in_array(id)
     }
 
     /// Compute whether the type has type parameter in array.

@@ -1492,6 +1492,16 @@ impl ClangItemParser for Item {
         ctx: &mut BindgenContext,
     ) -> TypeId {
         let id = ctx.next_item_id();
+
+        // handle pointer type alias
+        let mut ty = ty;
+        if ty != ty.canonical_type() {
+            let real_type = ty.canonical_type();
+            if real_type.kind() == clang_sys::CXType_Pointer {
+                ty = real_type;
+            }
+        }
+
         Self::from_ty_or_ref_with_id(id, ty, location, parent_id, ctx)
     }
 
